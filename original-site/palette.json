@@ -1,0 +1,428 @@
+{
+  "source": {
+    "site": "https://www.gtarchitects.in/",
+    "css": [
+      "https://www.gtarchitects.in/css/style.css",
+      "https://www.gtarchitects.in/css/bootstrap.css",
+      "https://www.gtarchitects.in/css/animate.css",
+      "https://www.gtarchitects.in/css/icomoon.css",
+      "https://www.gtarchitects.in/css/themify-icons.css",
+      "https://www.gtarchitects.in/css/owl.carousel.min.css",
+      "https://www.gtarchitects.in/css/owl.theme.default.min.css"
+    ],
+    "google_fonts": "https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700",
+    "template": "Aesthetic by freehtml5.co (FH5CO)",
+    "logo": "images/logo2.jpg (<div id=\"gtco-logo\"><a><img src=\"images/logo2.jpg\">)",
+    "notes": "Did NOT download images per task. Bootstrap v3.3.5 + Owl Carousel 2 + Animate.css (Daniel Eden) + icomoon + themify-icons."
+  },
+  "google_fonts_detail": {
+    "Merriweather": {
+      "weights": [
+        300,
+        400
+      ],
+      "usage": "body serif, paragraphs"
+    },
+    "Montserrat": {
+      "weights": [
+        400,
+        700
+      ],
+      "usage": "headings h1-h6, nav, buttons, footer links, labels"
+    }
+  },
+  "typography": {
+    "body": {
+      "font_family": "\"Merriweather\", serif",
+      "weight": 400,
+      "size": "14px",
+      "line_height": "1.7",
+      "color": "#777777"
+    },
+    "headings_all": {
+      "selector": "h1,h2,h3,h4,h5,h6,figure",
+      "font_family": "\"Montserrat\", sans-serif",
+      "weight": 400,
+      "color": "#000000",
+      "margin": "0 0 20px 0"
+    },
+    "nav_logo": {
+      "selector": ".gtco-nav #gtco-logo",
+      "size": "20px",
+      "transform": "uppercase",
+      "weight": "bold"
+    },
+    "nav_links": {
+      "selector": ".gtco-nav ul li a",
+      "family": "\"Montserrat\", sans-serif",
+      "size": "13px !important (uppercase, letter-spacing .05em)",
+      "base_color": "#CCCCCC",
+      "hover_active": "#000000"
+    },
+    "section_heading": {
+      "selector": ".gtco-heading h2",
+      "size": "40px",
+      "line_height": "1.5",
+      "color": "#4D4D4D",
+      "weight": 300
+    },
+    "section_paragraph": {
+      "selector": ".gtco-heading p",
+      "size": "18px",
+      "line_height": "1.7",
+      "color": "#898989"
+    },
+    "hero_h1": {
+      "selector": "#gtco-header h1 / .display-tc h1",
+      "size": "50px desktop / 59px cover, 34px mobile",
+      "weight": 100,
+      "color": "#D3F1ED (header) / #FFFFFF (cover)"
+    },
+    "hero_p": {
+      "selector": "#gtco-header p",
+      "size": "20px",
+      "color": "#D3F1ED"
+    },
+    "buttons": {
+      "selector": ".btn",
+      "family": "\"Montserrat\", sans-serif",
+      "size": "13px",
+      "weight": 700,
+      "letter_spacing": "2px",
+      "transform": "uppercase",
+      "padding": "20px 30px",
+      "radius": "0px (square)"
+    },
+    "footer_h3": {
+      "selector": "#gtco-footer h3",
+      "color": "#FFFFFF",
+      "size": "default h3, CTA 30px weight 300"
+    },
+    "footer_links": {
+      "selector": "#gtco-footer .gtco-list-link li a",
+      "transform": "uppercase",
+      "size": "13px !important",
+      "family": "\"Montserrat\", sans-serif"
+    }
+  },
+  "colors_all_hex_normalized_frequency": [
+    {
+      "hex": "#FFFFFF",
+      "count": 44
+    },
+    {
+      "hex": "#52D681",
+      "count": 24
+    },
+    {
+      "hex": "#000000",
+      "count": 21
+    },
+    {
+      "hex": "#CCCCCC",
+      "count": 6
+    },
+    {
+      "hex": "#5CB85C",
+      "count": 5
+    },
+    {
+      "hex": "#5BC0DE",
+      "count": 5
+    },
+    {
+      "hex": "#F0AD4E",
+      "count": 5
+    },
+    {
+      "hex": "#D9534F",
+      "count": 5
+    },
+    {
+      "hex": "#B3B3B3",
+      "count": 3
+    },
+    {
+      "hex": "#252525",
+      "count": 3
+    },
+    {
+      "hex": "#777777",
+      "count": 2
+    },
+    {
+      "hex": "#666666",
+      "count": 2
+    },
+    {
+      "hex": "#F6F6F6",
+      "count": 2
+    },
+    {
+      "hex": "#D3F1ED",
+      "count": 2
+    },
+    {
+      "hex": "#4D4D4D",
+      "count": 2
+    },
+    {
+      "hex": "#67DB90",
+      "count": 2
+    },
+    {
+      "hex": "#4CAE4C",
+      "count": 2
+    },
+    {
+      "hex": "#46B8DA",
+      "count": 2
+    },
+    {
+      "hex": "#EEA236",
+      "count": 2
+    },
+    {
+      "hex": "#D43F3A",
+      "count": 2
+    },
+    {
+      "hex": "#2F9051",
+      "count": 2
+    },
+    {
+      "hex": "#999999",
+      "count": 1
+    },
+    {
+      "hex": "#262626",
+      "count": 1
+    },
+    {
+      "hex": "#1A1A1A",
+      "count": 1
+    },
+    {
+      "hex": "#BFBFBF",
+      "count": 1
+    },
+    {
+      "hex": "#F2F2F2",
+      "count": 1
+    },
+    {
+      "hex": "#34A7BD",
+      "count": 1
+    },
+    {
+      "hex": "#D9D9D9",
+      "count": 1
+    },
+    {
+      "hex": "#898989",
+      "count": 1
+    },
+    {
+      "hex": "#444444",
+      "count": 1
+    },
+    {
+      "hex": "#303841",
+      "count": 1
+    },
+    {
+      "hex": "#E6E6E6",
+      "count": 1
+    }
+  ],
+  "colors_top20": [
+    {
+      "hex": "#FFFFFF",
+      "count": 44
+    },
+    {
+      "hex": "#52D681",
+      "count": 24
+    },
+    {
+      "hex": "#000000",
+      "count": 21
+    },
+    {
+      "hex": "#CCCCCC",
+      "count": 6
+    },
+    {
+      "hex": "#5CB85C",
+      "count": 5
+    },
+    {
+      "hex": "#5BC0DE",
+      "count": 5
+    },
+    {
+      "hex": "#F0AD4E",
+      "count": 5
+    },
+    {
+      "hex": "#D9534F",
+      "count": 5
+    },
+    {
+      "hex": "#B3B3B3",
+      "count": 3
+    },
+    {
+      "hex": "#252525",
+      "count": 3
+    },
+    {
+      "hex": "#777777",
+      "count": 2
+    },
+    {
+      "hex": "#666666",
+      "count": 2
+    },
+    {
+      "hex": "#F6F6F6",
+      "count": 2
+    },
+    {
+      "hex": "#D3F1ED",
+      "count": 2
+    },
+    {
+      "hex": "#4D4D4D",
+      "count": 2
+    },
+    {
+      "hex": "#67DB90",
+      "count": 2
+    },
+    {
+      "hex": "#4CAE4C",
+      "count": 2
+    },
+    {
+      "hex": "#46B8DA",
+      "count": 2
+    },
+    {
+      "hex": "#EEA236",
+      "count": 2
+    },
+    {
+      "hex": "#D43F3A",
+      "count": 2
+    }
+  ],
+  "colors_rgba": [
+    {
+      "value": "rgba(0, 0, 0, 0.75)",
+      "count": 9
+    },
+    {
+      "value": "rgba(0, 0, 0, 0.15)",
+      "count": 6
+    },
+    {
+      "value": "rgba(0, 0, 0, 0.1)",
+      "count": 4
+    },
+    {
+      "value": "rgba(0, 0, 0, 0.7)",
+      "count": 2
+    },
+    {
+      "value": "rgba(0, 0, 0, 0.5)",
+      "count": 2
+    },
+    {
+      "value": "rgba(29, 43, 83, 0.89)",
+      "count": 1
+    },
+    {
+      "value": "rgba(255, 255, 255, 0.5)",
+      "count": 1
+    },
+    {
+      "value": "rgba(255, 255, 255, 0.8)",
+      "count": 1
+    },
+    {
+      "value": "rgba(255, 255, 255, 0.2)",
+      "count": 1
+    },
+    {
+      "value": "rgba(255, 255, 255, 0.7)",
+      "count": 1
+    }
+  ],
+  "owl_theme_defaults": [
+    "#FFFFFF",
+    "#D6D6D6",
+    "#869791"
+  ],
+  "bootstrap_defaults_noted": [
+    "#337AB7 links",
+    "#333333 body text",
+    "#FFFFFF bg",
+    "#EEEEEE hr/border",
+    "#777777 muted"
+  ],
+  "background_images_and_refs": [
+    "../images/loader.gif (gtco-loader, white #FFFFFF bg)",
+    "owl.video.play.png (owl-carousel video play icon)",
+    "images/slider_1.jpg, slider_2.jpg, slider_3.jpg (hero Owl fullwidth slider)",
+    "images/logo2.jpg (header logo img, replaces text 'G. T. Architects')"
+  ],
+  "layout": {
+    "container": ".gtco-container max-width 1140px, padding 0 15px, centered",
+    "grid": "Bootstrap v3.3.5 grid: .row + .col-xs/sm/md/lg-*, e.g. col-md-8 col-md-offset-2 heading, col-md-4 footer/widgets, col-sm-2/col-xs-12 logo + col-xs-10 menu",
+    "nav": ".gtco-nav padding 30px 0 (10px mobile + 1px solid #666666 bottom border), z-index 1001, hidden menu-1/menu-2 under 768px -> offcanvas #gtco-offcanvas 270px black bg",
+    "hero_carousel": "Owl Carousel 2 .owl-carousel-fullwidth, .item > a + img + .slider-copy h2 (24px, weight 100, white, bottom gradient shadow inset rgba(0,0,0,0.75)), dots #CCCCCC inactive / #4D4D4D active, nav arrows rgba(0,0,0,0.7) bg white icon",
+    "sections": ".gtco-section padding 3em 0, .gtco-gray #F6F6F6 variant, #gtco-portfolio #303841 dark slate (unused on index), .gto-features top border 1px #E6E6E6",
+    "footer": "#gtco-footer #262626 bg, .gtco-copyright #1A1A1A bar, padding 7em 0",
+    "buttons_style": "square 0px radius, 2px solid variants, shadow 0 5px 10px rgba(0,0,0,0.15), uppercase Montserrat 700",
+    "forms": ".form-control 54px height, 18px light 300, 2px rgba(0,0,0,0.1) border, focus #52D681",
+    "animations": "Animate.css + .animate-box opacity 0 (JS reveal), .gototop 50x50 rgba(0,0,0,0.5) rounded 4px"
+  },
+  "primary_palette_proposed_7": [
+    {
+      "name": "Mint / Emerald accent (links, selection, btn-primary)",
+      "hex": "#52D681",
+      "usage": "a, ::selection, btn-primary bg/border, counter, news h3, social icons"
+    },
+    {
+      "name": "Pure black (headings, nav active/hover, dropdown bg)",
+      "hex": "#000000",
+      "usage": "h1-h6, logo link, nav hover, blockquote p, btn-white text"
+    },
+    {
+      "name": "Body gray (base text)",
+      "hex": "#777777",
+      "usage": "body color, staff/item p"
+    },
+    {
+      "name": "Dark footer charcoal",
+      "hex": "#262626",
+      "usage": "#gtco-footer bg"
+    },
+    {
+      "name": "Near-black copyright bar",
+      "hex": "#1A1A1A",
+      "usage": ".gtco-copyright bg"
+    },
+    {
+      "name": "Light gray section bg",
+      "hex": "#F6F6F6",
+      "usage": ".gtco-gray, .gtco-client bg"
+    },
+    {
+      "name": "White (page bg, footer headings)",
+      "hex": "#FFFFFF",
+      "usage": "body bg, footer h3, cover h1/h2"
+    }
+  ]
+}
