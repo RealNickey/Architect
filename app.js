@@ -62,18 +62,21 @@
     else el.scrollIntoView({ behavior: "smooth" });
   }
 
-  /* Header solid plus hide on scroll */
+  /* Floating header: always visible, shadow deepens after scroll (no auto-hide) */
   var head = document.getElementById("siteHead");
-  var lastY = 0;
+  function getY() {
+    return window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+  }
   function onY(y) {
     if (!head) return;
-    head.classList.toggle("is-solid", y > 40);
-    if (y > 500 && y > lastY + 4) head.classList.add("is-hidden");
-    else if (y < lastY - 4 || y < 200) head.classList.remove("is-hidden");
-    lastY = y;
+    if (typeof y !== "number" || isNaN(y)) y = getY();
+    head.classList.toggle("is-solid", y > 24);
+    head.classList.remove("is-hidden");
   }
-  if (lenis) lenis.on("scroll", function (e) { onY(e.scroll); });
-  else window.addEventListener("scroll", function () { onY(window.scrollY); }, { passive: true });
+  window.addEventListener("scroll", function () { onY(getY()); }, { passive: true });
+  if (lenis) lenis.on("scroll", function () { onY(getY()); });
+  window.addEventListener("load", function () { onY(getY()); });
+  onY(getY());
 
   /* GSAP interactive navbar pill */
   var nav = document.querySelector(".site-nav");
@@ -87,8 +90,8 @@
       else gsap.to(pill, Object.assign(props, { duration: 0.45, ease: "power3.out" }));
     }
     var active = nav.querySelector("a.is-active") || links[0];
-    gsap.from(".site-head", { y: -24, opacity: 0, duration: 0.9, ease: "power3.out" });
-    gsap.from(links, { y: -12, opacity: 0, duration: 0.7, ease: "power3.out", stagger: 0.06, delay: 0.15 });
+    gsap.from(".site-head", { y: -18, opacity: 0, duration: 0.9, ease: "power3.out", clearProps: "all" });
+    gsap.from(links, { y: -10, opacity: 0, duration: 0.6, ease: "power3.out", stagger: 0.06, delay: 0.15, clearProps: "transform,opacity" });
     function placeActive(animate) { movePill(nav.querySelector("a.is-active") || active, animate); }
     placeActive(false);
     window.addEventListener("load", function () { placeActive(false); });
@@ -159,7 +162,7 @@
     gsap.set(fades, { opacity: 0, y: 24 });
     if (media) gsap.set(media, { scale: 1.18 });
     var tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-    if (media) tl.to(media, { scale: 1.04, duration: 2.2, ease: "power3.out" }, 0);
+    if (media) tl.to(media, { scale: 1, duration: 2.2, ease: "power3.out" }, 0);
     tl.to(lines, { yPercent: 0, duration: 1.3, stagger: 0.1 }, 0.15);
     tl.to(fades, { opacity: 1, y: 0, duration: 0.9, stagger: 0.09 }, 0.6);
   }
@@ -167,10 +170,19 @@
   if (hero) {
     entrance(hero);
     if (hasST && !reduceMotion) {
-      gsap.to(hero.querySelector("[data-hero-media]"), {
-        yPercent: 14, ease: "none",
-        scrollTrigger: { trigger: hero, start: "top top", end: "bottom top", scrub: true }
-      });
+      var heroFrame = hero.querySelector(".hero__media");
+      if (heroFrame) {
+        /* Frame grows to full-bleed width while it travels up the viewport */
+        gsap.fromTo(heroFrame, { scale: 1 }, {
+          scale: function () {
+            var w = heroFrame.getBoundingClientRect().width || 1;
+            return window.innerWidth / w;
+          },
+          borderRadius: 0,
+          ease: "none",
+          scrollTrigger: { trigger: heroFrame, start: "top 85%", end: "top 10%", scrub: true, invalidateOnRefresh: true }
+        });
+      }
     }
   }
   var phero = document.querySelector(".page-hero");
@@ -644,6 +656,19 @@
   document.querySelectorAll("[data-top]").forEach(function (btn) {
     btn.addEventListener("click", function () { haptic("medium"); scrollToTarget(0); });
   });
+
+  /* Index photos: block right-click save and drag-to-copy (index only) */
+  if (document.querySelector(".hero")) {
+    document.querySelectorAll("img").forEach(function (im) {
+      im.setAttribute("draggable", "false");
+    });
+    document.addEventListener("dragstart", function (e) {
+      if (e.target && e.target.closest && e.target.closest("img")) e.preventDefault();
+    });
+    document.addEventListener("contextmenu", function (e) {
+      if (e.target && e.target.closest && e.target.closest("img")) e.preventDefault();
+    });
+  }
 
   window.addEventListener("load", function () { if (hasST) ScrollTrigger.refresh(); });
 })();
