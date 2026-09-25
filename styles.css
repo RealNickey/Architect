@@ -121,15 +121,15 @@ button { font: inherit; color: inherit; }
 
 /* Header — floating glass bar, always visible, uniform across pages */
 .site-head { position: fixed; top: 14px; left: 0; right: 0; z-index: 1000; pointer-events: none; }
-.site-head__inner { pointer-events: auto; width: var(--wrap); margin-inline: auto; min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 8px 8px 16px; background: rgba(255,255,255,0.82); backdrop-filter: blur(16px) saturate(1.4); -webkit-backdrop-filter: blur(16px) saturate(1.4); border: 1px solid rgba(12,12,13,0.09); border-radius: 18px; box-shadow: 0 12px 32px rgba(12,12,13,0.10); transition: box-shadow 0.35s var(--ease), background 0.35s, border-color 0.35s; }
-.site-head.is-solid .site-head__inner { background: rgba(255,255,255,0.94); border-color: rgba(12,12,13,0.13); box-shadow: 0 18px 44px rgba(12,12,13,0.15); }
+.site-head__inner { pointer-events: auto; width: var(--wrap); margin-inline: auto; min-height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 8px 0; background: transparent; border: none; border-radius: 0; box-shadow: none; }
+.site-head.is-solid .site-head__inner { background: transparent; border: none; box-shadow: none; }
 /* Never auto-hide: the bar floats on top always (legacy class kept as no-op) */
 .site-head.is-hidden { transform: none; }
 .brand { display: flex; align-items: center; gap: 12px; text-decoration: none; border-radius: 10px; }
 .brand img { height: 36px; width: auto; border-radius: 8px; }
 .brand__word { font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); line-height: 1.5; }
 .brand__word small { display: block; font-size: 9px; letter-spacing: 0.32em; opacity: 0.55; font-weight: 500; }
-.site-nav { position: relative; display: flex; gap: 2px; align-items: center; background: rgba(12,12,13,0.06); border: 1px solid rgba(12,12,13,0.06); border-radius: 999px; padding: 4px; }
+.site-nav { position: relative; display: flex; gap: 2px; align-items: center; background: transparent; border: none; border-radius: 0; padding: 4px 0; }
 .site-nav a {
   position: relative; z-index: 1;
   display: inline-flex; align-items: center; min-height: 40px;
@@ -141,6 +141,10 @@ button { font: inherit; color: inherit; }
 }
 .site-nav a:hover { color: var(--ink); }
 .site-nav a.is-active { color: #fff; }
+/* Inverted hover: dark pill slides under the hovered link, text flips white with it */
+.site-nav a.is-hover { color: #fff; }
+/* While hovering elsewhere, the active link gives up its white text so it never sits white-on-transparent */
+.site-nav.is-hovering a.is-active:not(.is-hover) { color: rgba(12,12,13,0.62); }
 .site-nav a:focus-visible { outline: 2px solid var(--tang); outline-offset: 2px; }
 .nav-pill {
   position: absolute; top: 4px; bottom: 4px; left: 0; width: 0; height: auto;
@@ -148,6 +152,10 @@ button { font: inherit; color: inherit; }
   border-radius: 999px;
   z-index: 0;
   pointer-events: none;
+}
+/* No pill is placed when reduced motion is on, so keep the active link dark and visible */
+@media (prefers-reduced-motion: reduce) {
+  .site-nav a.is-active { color: var(--ink); }
 }
 .menu-btn { display: none; width: 44px; height: 44px; background: rgba(12,12,13,0.05); border: 1px solid rgba(12,12,13,0.14); border-radius: 12px; cursor: pointer; position: relative; flex: none; transition: background 0.3s, border-color 0.3s; }
 .menu-btn:hover { background: rgba(12,12,13,0.09); }
@@ -236,7 +244,7 @@ body.works {
   --color-text-alt: #54544f;
   --color-bg: #f5f5f3;
   --color-link: #0c0c0d;
-  --color-link-hover: #8c1a1a;
+  --color-link-hover: #0c0c0d;
   --color-accent: #8c1a1a;
   --page-padding: 2rem;
   --stack-margin: 10rem;
@@ -280,6 +288,10 @@ body.works.oh { overflow: hidden; }
 body.works a { text-decoration: none; color: var(--color-link); outline: none; }
 body.works a:hover { color: var(--color-link-hover); outline: none; }
 body.works a:focus-visible { outline: 1px solid var(--tang); background: transparent; }
+/* Keep the header nav's black/white inverted hover on the works page too */
+body.works .site-nav a:hover { color: var(--ink); }
+body.works .site-nav a.is-hover { color: #fff; }
+body.works .site-nav.is-hovering a.is-active:not(.is-hover) { color: rgba(12,12,13,0.62); }
 
 /* Works is light now: it shares the default floating light bar (no overrides).
    Only the skip link needs a dark-on-light flip for contrast. */

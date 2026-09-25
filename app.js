@@ -96,9 +96,27 @@
     placeActive(false);
     window.addEventListener("load", function () { placeActive(false); });
     window.addEventListener("resize", function () { placeActive(false); });
+    /* Inverted hover: pill follows the hovered/focused link and its text flips white */
+    var hoverLink = null;
+    function setHover(a) {
+      if (hoverLink === a) return;
+      if (hoverLink) hoverLink.classList.remove("is-hover");
+      hoverLink = a;
+      if (a) {
+        movePill(a);
+        a.classList.add("is-hover");
+        nav.classList.add("is-hovering");
+      } else {
+        placeActive(true);
+        nav.classList.remove("is-hovering");
+      }
+    }
     links.forEach(function (a) {
-      a.addEventListener("mouseenter", function () { movePill(a); });
-      a.addEventListener("focus", function () { movePill(a); });
+      a.addEventListener("mouseenter", function () { setHover(a); });
+      a.addEventListener("focus", function () { setHover(a); });
+      a.addEventListener("blur", function () {
+        if (hoverLink === a && !nav.matches(":hover")) setHover(null);
+      });
       /* subtle magnetic lift */
       a.addEventListener("mousemove", function (e) {
         var r = a.getBoundingClientRect();
@@ -108,7 +126,7 @@
       a.addEventListener("mouseleave", function () { gsap.to(a, { x: 0, duration: 0.35, ease: "power3.out" }); });
       a.addEventListener("click", function () { haptic("page"); });
     });
-    nav.addEventListener("mouseleave", function () { placeActive(true); });
+    nav.addEventListener("mouseleave", function () { setHover(null); });
     /* keep pill on active after fonts settle */
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { placeActive(false); });
   } else if (nav) {
@@ -156,14 +174,14 @@
     if (reduceMotion) {
       gsap.set(lines, { yPercent: 0 });
       gsap.set(fades, { opacity: 1, y: 0 });
-      if (media) gsap.set(media, { y: 0, opacity: 1 });
+      if (media) gsap.set(media, { y: 0, opacity: 1, scale: 1 });
       return;
     }
     gsap.set(lines, { yPercent: 115 });
     gsap.set(fades, { opacity: 0, y: 24 });
-    if (media) gsap.set(media, { y: 140, opacity: 0 });
+    if (media) gsap.set(media, { y: 140, opacity: 0, scale: 0.9 });
     var tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-    if (media) tl.to(media, { y: 0, opacity: 1, duration: 1.4, ease: "power3.out" }, 0.35);
+    if (media) tl.to(media, { y: 0, opacity: 1, scale: 1, duration: 1.4, ease: "power3.out" }, 0.35);
     tl.to(lines, { yPercent: 0, duration: 1.3, stagger: 0.1 }, 0.15);
     tl.to(fades, { opacity: 1, y: 0, duration: 0.9, stagger: 0.09 }, 0.6);
   }
