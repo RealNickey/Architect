@@ -331,7 +331,7 @@
 
   /* Shared element morph dialog, GSAP FLIP style: the frame itself flies to center */
   var pModal = document.getElementById("pmodal");
-  var pModalOpen = false, pSourceCard = null, pLastFocus = null, pGhost = null, pMorphed = false;
+  var pModalOpen = false, pSourceCard = null, pLastFocus = null, pGhost = null, pMorphed = false, pBusy = false;
   function fillFrame(card) {
     var pmImg = document.getElementById("pmImg");
     var pmGraphic = document.getElementById("pmGraphic");
@@ -379,7 +379,7 @@
     return g;
   }
   function openFrame(card) {
-    if (!pModal || pModalOpen) return;
+    if (!pModal || pModalOpen || pBusy) return;
     var isGraphic = fillFrame(card);
     pLastFocus = document.activeElement;
     pModalOpen = true;
@@ -409,12 +409,14 @@
       var srcRect = media.getBoundingClientRect();
       var dstRect = pmMedia.getBoundingClientRect();
       media.style.visibility = "hidden";
-      pGhost = makeGhost(card, srcRect, isGraphic);
-      var img = pGhost.querySelector("img");
-      var tl = gsap.timeline({ defaults: { ease: "power3.inOut" }, onComplete: function () {
-        if (pGhost && pGhost.parentNode) pGhost.parentNode.removeChild(pGhost);
-        pGhost = null;
-        fig.classList.remove("is-hidden");
+    pGhost = makeGhost(card, srcRect, isGraphic);
+    var img = pGhost.querySelector("img");
+    pBusy = true;
+    var tl = gsap.timeline({ defaults: { ease: "power3.inOut" }, onComplete: function () {
+      pBusy = false;
+      if (pGhost && pGhost.parentNode) pGhost.parentNode.removeChild(pGhost);
+      pGhost = null;
+      fig.classList.remove("is-hidden");
         gsap.to(pModal.querySelector(".pmodal__close"), { opacity: 1, duration: 0.2, delay: 0.15 });
         var btn = pModal.querySelector("[data-pclose].pmodal__close");
         if (btn) btn.focus();
@@ -431,7 +433,7 @@
     pMorphed = true;
   }
   function closeFrame() {
-    if (!pModal || !pModalOpen) return;
+    if (!pModal || !pModalOpen || pBusy) return;
     haptic("light");
     var backdrop = pModal.querySelector(".pmodal__backdrop");
     var fig = pModal.querySelector(".pmodal__fig");
@@ -439,6 +441,7 @@
     function done() {
       if (pGhost && pGhost.parentNode) pGhost.parentNode.removeChild(pGhost);
       pGhost = null;
+      pBusy = false;
       var media = pSourceCard ? pSourceCard.querySelector(".pcard__media, .pcard__type") : null;
       if (media) media.style.visibility = "";
       pModal.hidden = true;
@@ -461,6 +464,7 @@
     pGhost = makeGhost(pSourceCard, fromRect, isGraphic);
     var img = pGhost.querySelector("img");
     if (img) img.style.filter = "grayscale(0%)";
+    pBusy = true;
     var tl = gsap.timeline({ defaults: { ease: "power3.inOut" }, onComplete: done });
     tl.to(backdrop, { opacity: 0, duration: 0.28, ease: "power2.in" }, 0);
     tl.to(pGhost, { left: toRect.left, top: toRect.top, width: toRect.width, height: toRect.height, duration: 0.36 }, 0);
@@ -468,6 +472,7 @@
   }
   if (pModal) {
     document.querySelectorAll("[data-prows] .pcard").forEach(function (card) {
+      if (card.dataset.graphic) { card.tabIndex = -1; return; }
       card.addEventListener("pointerdown", function () { haptic("light"); });
       card.addEventListener("click", function () { openFrame(card); });
     });
