@@ -62,11 +62,29 @@
     placeActive(false);
     window.addEventListener("load", function () { placeActive(false); });
     window.addEventListener("resize", function () { placeActive(false); });
+    /* Inverted hover: pill follows the hovered/focused link and its text flips white */
+    var hoverLink = null;
+    function setHover(a) {
+      if (hoverLink === a) return;
+      if (hoverLink) hoverLink.classList.remove("is-hover");
+      hoverLink = a;
+      if (a) {
+        movePill(a);
+        a.classList.add("is-hover");
+        nav.classList.add("is-hovering");
+      } else {
+        placeActive(true);
+        nav.classList.remove("is-hovering");
+      }
+    }
     links.forEach(function (a) {
-      a.addEventListener("mouseenter", function () { movePill(a); });
-      a.addEventListener("focus", function () { movePill(a); });
+      a.addEventListener("mouseenter", function () { setHover(a); });
+      a.addEventListener("focus", function () { setHover(a); });
+      a.addEventListener("blur", function () {
+        if (hoverLink === a && !nav.matches(":hover")) setHover(null);
+      });
     });
-    nav.addEventListener("mouseleave", function () { placeActive(true); });
+    nav.addEventListener("mouseleave", function () { setHover(null); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { placeActive(false); });
   }
 
@@ -195,7 +213,6 @@
     if (hasObserver && !reduceMotion) {
       this.scrollObserver = Observer.create({
         type: "wheel,touch,pointer",
-        wheelSpeed: -1,
         onDown: scrollDown,
         onUp: scrollUp,
         tolerance: 10,
