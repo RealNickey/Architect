@@ -156,13 +156,14 @@
     if (reduceMotion) {
       gsap.set(lines, { yPercent: 0 });
       gsap.set(fades, { opacity: 1, y: 0 });
+      if (media) gsap.set(media, { y: 0, opacity: 1 });
       return;
     }
     gsap.set(lines, { yPercent: 115 });
     gsap.set(fades, { opacity: 0, y: 24 });
-    if (media) gsap.set(media, { scale: 1.18 });
+    if (media) gsap.set(media, { y: 140, opacity: 0 });
     var tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-    if (media) tl.to(media, { scale: 1, duration: 2.2, ease: "power3.out" }, 0);
+    if (media) tl.to(media, { y: 0, opacity: 1, duration: 1.4, ease: "power3.out" }, 0.35);
     tl.to(lines, { yPercent: 0, duration: 1.3, stagger: 0.1 }, 0.15);
     tl.to(fades, { opacity: 1, y: 0, duration: 0.9, stagger: 0.09 }, 0.6);
   }
