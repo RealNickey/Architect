@@ -750,20 +750,16 @@ body.gallery-full .pcard--type .pcard__cap b { color: #0c0c0d; }
   color: rgba(250, 250, 250, 0.55);
 }
 
-/* Page transition veil — minimalist luxury: ink panel, SVG curves, tang hairline */
-.veil { position: fixed; inset: 0; z-index: 3000; visibility: hidden; pointer-events: none; transform: translateY(100%); will-change: transform; }
-.veil.is-live { pointer-events: all; }
-.veil__panel { position: absolute; inset: 0; background: #0c0c0d; }
-.veil__curve { position: absolute; left: 0; width: 100%; height: clamp(72px, 11vw, 132px); display: block; }
-.veil__curve--top { top: 1px; transform: translateY(-99%); }
-.veil__curve--bottom { bottom: 1px; transform: translateY(99%) rotate(180deg); }
-.veil__curve path { fill: #0c0c0d; }
-.veil__line { fill: none; stroke: var(--tang); stroke-width: 2; opacity: 0.6; }
-.veil__center { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; padding: 24px; }
-.veil__brand { margin: 0; font-family: var(--display); font-weight: 800; font-stretch: 115%; text-transform: uppercase; letter-spacing: -0.02em; line-height: 1; font-size: clamp(1.8rem, 5vw, 3.4rem); color: #fafafa; }
-.veil__brand em { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; letter-spacing: 0; color: #c98282; }
-.veil__sub { margin: 12px 0 0; font-size: 10.5px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase; color: rgba(250,250,250,0.55); }
-.veil__rule { width: 56px; height: 2px; background: var(--tang); margin: 18px auto 0; }
-@media (prefers-reduced-motion: reduce) {
-  .veil { display: none; }
+/* Codrops Sketch 021: SVG Path Page Transition (Vertical) — overlay, copied verbatim. Fill set to studio ink. */
+.overlay {
+	pointer-events: none;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 3000;
+}
+.overlay__path {
+	fill: #0c0c0d;
 }
